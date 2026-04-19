@@ -59,7 +59,7 @@ flowchart LR
   C --> D{Allow?}
   D -- No --> E[Explainable Deny Response]
   D -- Yes --> F[Forwarder]
-  F --> G[Downstream MCP Server(s)]
+  F --> G[Downstream MCP Servers]
   B --> H[Redaction Layer]
   H --> I[Structured Audit Logs]
 ```
