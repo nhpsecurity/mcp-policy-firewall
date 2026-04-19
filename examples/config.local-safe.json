@@ -1,0 +1,46 @@
+{
+  "host": "127.0.0.1",
+  "port": 8787,
+  "strictStartup": false,
+  "servers": [
+    {
+      "name": "filesystem",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    }
+  ],
+  "policy": {
+    "mode": "hybrid",
+    "tools": {
+      "allow": ["*list*", "*read*", "search*"],
+      "deny": ["*delete*", "*write*", "*exec*"],
+      "requireConfirmation": ["*shell*"]
+    },
+    "scope": {
+      "paths": {
+        "allow": ["."],
+        "deny": [".env", ".git", "**/secrets/**"]
+      },
+      "repos": {
+        "allow": [],
+        "deny": []
+      },
+      "domains": {
+        "allow": [],
+        "deny": ["*"]
+      }
+    },
+    "redaction": {
+      "enabled": true,
+      "extraPatterns": []
+    },
+    "defaults": {
+      "onUnknownTool": "allow"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "filePath": "./logs/audit.log"
+  }
+}

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: mcp-firewall
+message: "If you use this project, please cite it using this metadata."
+type: software
+authors:
+  - family-names: Anonymous
+repository-code: "https://github.com/anonymous/mcp-firewall"
+url: "https://github.com/anonymous/mcp-firewall"
+abstract: "Policy firewall for MCP servers with allow/deny controls, scope guardrails, redaction, and audit logging."
+license: MIT
+keywords:
+  - mcp
+  - model-context-protocol
+  - security
+  - firewall
+  - ai-agents
+version: 0.1.0
+date-released: 2026-04-19

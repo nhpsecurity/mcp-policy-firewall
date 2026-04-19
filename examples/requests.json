@@ -1,0 +1,34 @@
+{
+  "health": {
+    "method": "GET",
+    "path": "/health"
+  },
+  "list_tools": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/list",
+    "params": {}
+  },
+  "safe_tool_call": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "filesystem__read_file",
+      "arguments": {
+        "path": "README.md"
+      }
+    }
+  },
+  "blocked_tool_call": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+      "name": "filesystem__delete_file",
+      "arguments": {
+        "path": "README.md"
+      }
+    }
+  }
+}

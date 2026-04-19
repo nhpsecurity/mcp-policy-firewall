@@ -1,0 +1,100 @@
+{
+  "name": "mcp-firewall",
+  "version": "0.1.0",
+  "description": "A policy firewall for MCP servers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anonymous/mcp-firewall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anonymous/mcp-firewall/issues"
+  },
+  "homepage": "https://github.com/anonymous/mcp-firewall#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "require": "./dist/server.js",
+      "import": "./dist/server.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "presets",
+    "examples",
+    "README.md",
+    "CITATION.cff",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "SECURITY.md",
+    "ROADMAP.md",
+    "CONTRIBUTING.md",
+    "docs/ARCHITECTURE.md",
+    "docs/RATIONALE.md",
+    "docs/CITATIONS.md",
+    "docs/OPERATIONS_RUNBOOK.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "mcp-firewall": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts src/server.ts --format cjs,esm --dts",
+    "dev": "tsup src/cli.ts src/server.ts --watch",
+    "start": "node dist/cli.js start",
+    "start:mock": "node dist/cli.js start --config ./examples/config.mock-local.json",
+    "list": "node dist/cli.js list",
+    "list:mock": "node dist/cli.js list --config ./examples/config.mock-local.json",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"{src,tests,scripts}/**/*.{ts,js,mjs,cjs}\" \"{examples,presets}/**/*.json\" package.json config.example.json tsconfig.json",
+    "format:check": "prettier --check \"{src,tests,scripts}/**/*.{ts,js,mjs,cjs}\" \"{examples,presets}/**/*.json\" package.json config.example.json tsconfig.json",
+    "smoke:test": "node ./scripts/smoke-test.mjs",
+    "smoke:test:ps1": "powershell -ExecutionPolicy Bypass -File ./scripts/smoke-test.ps1",
+    "qa:local": "node ./scripts/local-qa.mjs",
+    "qa:local:ps1": "powershell -ExecutionPolicy Bypass -File ./scripts/local-qa.ps1",
+    "qa:ci": "npm run lint && npm run typecheck && npm test && npm run build && npm run format:check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run qa:ci"
+  },
+  "keywords": [
+    "mcp",
+    "firewall",
+    "security",
+    "policy",
+    "model-context-protocol",
+    "ai-tools"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "commander": "^14.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "winston": "^3.19.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
+    "typescript-eslint": "^8.46.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.4"
+  }
+}

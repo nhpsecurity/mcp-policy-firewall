@@ -1,0 +1,39 @@
+{
+  "host": "127.0.0.1",
+  "port": 8787,
+  "strictStartup": false,
+  "servers": [],
+  "policy": {
+    "mode": "allowlist",
+    "tools": {
+      "allow": ["*list*", "*read*", "*search*", "*get*", "*show*"],
+      "deny": ["*"],
+      "requireConfirmation": []
+    },
+    "scope": {
+      "paths": {
+        "allow": ["."],
+        "deny": [".env", ".git", "**/secrets/**"]
+      },
+      "repos": {
+        "allow": ["*"],
+        "deny": []
+      },
+      "domains": {
+        "allow": [],
+        "deny": ["*"]
+      }
+    },
+    "redaction": {
+      "enabled": true,
+      "extraPatterns": []
+    },
+    "defaults": {
+      "onUnknownTool": "deny"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "filePath": "./logs/audit.log"
+  }
+}

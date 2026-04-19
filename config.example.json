@@ -1,0 +1,54 @@
+{
+  "host": "127.0.0.1",
+  "port": 8787,
+  "strictStartup": false,
+  "servers": [
+    {
+      "name": "github",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "local-sse",
+      "type": "sse",
+      "url": "http://localhost:3001/sse"
+    }
+  ],
+  "policy": {
+    "mode": "hybrid",
+    "tools": {
+      "allow": ["*read*", "*list*", "search*"],
+      "deny": ["*delete*", "*write*", "*push*"],
+      "requireConfirmation": ["*exec*", "*shell*"]
+    },
+    "scope": {
+      "paths": {
+        "allow": ["."],
+        "deny": [".env", ".git", "**/secrets/**"]
+      },
+      "repos": {
+        "allow": ["your-org/*"],
+        "deny": []
+      },
+      "domains": {
+        "allow": [],
+        "deny": ["*"]
+      }
+    },
+    "redaction": {
+      "enabled": true,
+      "extraPatterns": []
+    },
+    "defaults": {
+      "onUnknownTool": "allow"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "filePath": "./logs/audit.log"
+  }
+}
